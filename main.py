@@ -57,7 +57,9 @@ while True:
     
     print("Yapılabilecekler:\n")
     for komut in komutlar:
-        print("{komut}: {aciklama}".format(komut = komutlar[komut].get('komut_adi'), aciklama = komutlar[komut].get('komut_aciklama')))
+        komut_adi = komutlar[komut].get('komut_adi')
+        komut_aciklama = komutlar[komut].get('komut_aciklama')
+        print(f"{komut_adi}: {komut_aciklama}")
     
     komut = input("Ne yapmak istiyorsunuz? ")
     if komut == 'giris':
@@ -75,8 +77,10 @@ while True:
         users = users_query.fetchall()
         if users:
             for user in users:
-                print("Kullanıcı adı: {name}".format(name = user['user_name']))
-                print("Eposta adresi: {email}".format(email = user['user_mail']))
+                name = user['user_name']
+                email = user['user_mail']
+                print(f"Kullanıcı adı: {name}")
+                print(f"Eposta adresi: {email}")
         else:
             print("Üye bulunamadı!\n")
 
