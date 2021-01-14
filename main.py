@@ -9,6 +9,9 @@ db='blog',
 charset='utf8mb4',
 cursorclass=pymysql.cursors.DictCursor)
 
+
+#Login Methodu
+#email ve password değeri alır
 def login(email, password):
     login_query = db.cursor()
     sql = 'SELECT * FROM users WHERE user_mail = %s AND user_password = %s'
@@ -18,6 +21,9 @@ def login(email, password):
         return True
     return False
 
+
+#Register methodu
+#name, email, password değeri alır
 def register(name, email, password):
     check_user_query = db.cursor()
     check_user_sql = 'SELECT * FROM users WHERE user_mail = %s OR user_name = %s'
@@ -31,6 +37,8 @@ def register(name, email, password):
         current_datetime = datetime.now()
         register_query.execute(sql, [name, email, password, current_datetime])
         db.commit()
+
+#komut sorgulama
 while True:
     komutlar = {
         "komut_1": {
@@ -46,10 +54,11 @@ while True:
             'komut_aciklama': 'Sisteme kayıt olun'
         }
     }
+    
     print("Yapılabilecekler:\n")
     for komut in komutlar:
         print("{komut}: {aciklama}".format(komut = komutlar[komut].get('komut_adi'), aciklama = komutlar[komut].get('komut_aciklama')))
-        #print(komutlar[komut].get('komut_adi'))
+    
     komut = input("Ne yapmak istiyorsunuz? ")
     if komut == 'giris':
         giris_mail = input("Eposta girin: ")
